@@ -1,9 +1,9 @@
 function GetAllBooks() {
     var books = [
-        { name: "MyBook-krishna", author: "krishna", available: true, category: Categories.Biography },
-        { name: "MyBook-kumar", author: "kumar", available: false, category: Categories.Childrem },
-        { name: "MyBook-Arjun", author: "Arjun", available: true, category: Categories.Poetry },
-        { name: "MyBook-Mark", author: "Mark", available: true, category: Categories.Poetry },
+        { id: 1, name: "MyBook-krishna", author: "krishna", available: true, category: Categories.Biography },
+        { id: 2, name: "MyBook-kumar", author: "kumar", available: false, category: Categories.Childrem },
+        { id: 3, name: "MyBook-Arjun", author: "Arjun", available: true, category: Categories.Poetry },
+        { id: 4, name: "MyBook-Mark", author: "Mark", available: true, category: Categories.Poetry },
     ];
     return books;
 }
@@ -39,8 +39,23 @@ function GetBookTitlesByCategory(category) {
     }
     return bookTitle;
 }
+function GetBookByID(id) {
+    var allBooks = GetAllBooks();
+    var result = allBooks.filter(function (v) { return v.id === id; });
+    return result;
+}
+function CreateCustomerID(name, id) {
+    return name + '  ' + id;
+}
+var IDGenerator;
+IDGenerator = CreateCustomerID;
+var generatedId = IDGenerator('krishna', 1);
+console.log('Genereate ID is => ', generatedId);
 var allBooks = GetAllBooks();
 LogFirstAvailableBook(allBooks);
 var title = GetBookTitlesByCategory(Categories.Poetry);
 console.log(title);
+title.forEach(function (v) { return console.log('Result is => ', v); });
+var result = GetBookByID(2);
+console.log("Returned book based on ID =>", result[0]);
 //# sourceMappingURL=app.js.map
