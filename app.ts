@@ -10,7 +10,7 @@ function GetAllBooks() {
     return books;
 }
 
-function LogFirstAvailableBook(books: any): void {
+function LogFirstAvailableBook(books = GetAllBooks()): void {
 
     let numberOfBooks: number = books.length;
     let firstAvailableBook: string = '';
@@ -58,10 +58,35 @@ const generatedId = IDGenerator('krishna',1);
 console.log('Genereate ID is => ', generatedId)
 
 const allBooks = GetAllBooks();
-LogFirstAvailableBook(allBooks);
+LogFirstAvailableBook();
 const title: Array<string> = GetBookTitlesByCategory(Categories.Poetry)
 console.log(title);
 title.forEach((v) => console.log('Result is => ',v));
 
 const result = GetBookByID(2);
 console.log("Returned book based on ID =>", result[0]);
+
+function CreateCustomer(name: string, age?:number, city?: string) : void {
+
+    console.log("customer details => " , name , age, city);
+}
+
+
+CreateCustomer('Tension', 12, 'ooty');
+
+function GetTitles( id: number): any;
+function GetTitles( name: Categories): any;
+
+function GetTitles(property: any) {
+    if(typeof property === 'string') {
+            console.log(property);
+            // GetBookTitlesByCategory()
+        
+    } else if(typeof property === 'number') {
+        console.log("Overloaded functions ");
+        const ID = GetBookByID(property);
+        console.log(ID[0]);
+    }
+}
+
+GetTitles(Categories.Biography);

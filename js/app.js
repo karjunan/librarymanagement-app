@@ -8,6 +8,7 @@ function GetAllBooks() {
     return books;
 }
 function LogFirstAvailableBook(books) {
+    if (books === void 0) { books = GetAllBooks(); }
     var numberOfBooks = books.length;
     var firstAvailableBook = '';
     for (var _i = 0, books_1 = books; _i < books_1.length; _i++) {
@@ -52,10 +53,26 @@ IDGenerator = CreateCustomerID;
 var generatedId = IDGenerator('krishna', 1);
 console.log('Genereate ID is => ', generatedId);
 var allBooks = GetAllBooks();
-LogFirstAvailableBook(allBooks);
+LogFirstAvailableBook();
 var title = GetBookTitlesByCategory(Categories.Poetry);
 console.log(title);
 title.forEach(function (v) { return console.log('Result is => ', v); });
 var result = GetBookByID(2);
 console.log("Returned book based on ID =>", result[0]);
+function CreateCustomer(name, age, city) {
+    console.log("customer details => ", name, age, city);
+}
+CreateCustomer('Tension', 12, 'ooty');
+function GetTitles(property) {
+    if (typeof property === 'string') {
+        console.log(property);
+        // GetBookTitlesByCategory()
+    }
+    else if (typeof property === 'number') {
+        console.log("Overloaded functions ");
+        var ID = GetBookByID(property);
+        console.log(ID[0]);
+    }
+}
+GetTitles(Categories.Biography);
 //# sourceMappingURL=app.js.map
