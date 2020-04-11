@@ -1,12 +1,14 @@
-function GetAllBooks() {
+import {Categories} from './enum';
+import {Book} from './interfaces';
+import {StringGenerator} from './stringGenerator';
+
+function GetAllBooks(): Book[] {
     let books = [
         {id:1 ,name: "MyBook-krishna", author: "krishna", available: true,category: Categories.Biography},
         {id:2 ,name: "MyBook-kumar", author: "kumar", available: false,category: Categories.Childrem},
         {id:3 ,name: "MyBook-Arjun", author: "Arjun", available: true,category: Categories.Poetry},
         {id:4 ,name: "MyBook-Mark", author: "Mark", available: true,category: Categories.Poetry},
-
     ]
-
     return books;
 }
 
@@ -24,7 +26,6 @@ function LogFirstAvailableBook(books = GetAllBooks()): void {
     console.log('First Available', firstAvailableBook);
 }
 
-enum Categories {Biography, Poetry, History, Childrem}
 
 function GetBookTitlesByCategory(category: Categories) : Array<string> {
     console.log('Getting all categories ', Categories[category])
@@ -38,10 +39,10 @@ function GetBookTitlesByCategory(category: Categories) : Array<string> {
     return bookTitle;
 }
 
-function GetBookByID(id: number): Array<any> {
+function GetBookByID(id: number): Book {
     const allBooks = GetAllBooks();
-    const result: Array<any> = allBooks.filter(v => v.id === id)
-    return result;
+    const book: Book = allBooks.filter(v => v.id === id)[0];
+    return book;
 }
 
 
@@ -50,11 +51,12 @@ function CreateCustomerID(name: string, id: number ) : string {
     return name + '  ' + id;
 }
 
-let IDGenerator: (chars: string, id: number) => string;
+// let IDGenerator: (chars: string, id: number) => string;
 
-IDGenerator = CreateCustomerID;
 
-const generatedId = IDGenerator('krishna',1);
+let sg:StringGenerator = CreateCustomerID;
+
+const generatedId = sg('krishna',1);
 console.log('Genereate ID is => ', generatedId)
 
 const allBooks = GetAllBooks();
@@ -89,4 +91,26 @@ function GetTitles(property: any) {
     }
 }
 
-GetTitles(Categories.Biography);
+// GetTitles(Categories.Biography);
+
+function printBook(book: Book) {
+
+    console.log(book.name + " = " + book.author)
+}
+
+let myBook = {
+    id: 5,
+    name: 'Life of Ram',
+    author: 'Ram Aujha',
+    available: true,
+    category : Categories.Biography,
+    year: '2019',
+    copies: 100,
+    markDamaged: (reason: string) => {
+        console.log("damaged book is because of ", reason);
+        return reason
+    }
+}
+
+printBook(myBook);
+myBook.markDamaged("rain")

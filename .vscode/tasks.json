@@ -7,15 +7,17 @@
             "label": "TSC",
             "type": "shell",
             "command": "tsc",
-            "args": [
-                "--target",
-                "ES5",
-                "--outDir",
-                "js",
-                "--sourceMap",
-                "--watch",
-                "app.ts"
-            ],
+            "args": [],
+            // "args": [
+            //     "--target",
+            //     "ES5",
+            //     "--outDir",
+            //     "js",
+            //     "--module","commonjs",
+            //     "--sourceMap",
+            //     "--watch",
+            //     "app.ts"
+            // ],
             "problemMatcher": "$tsc",
             "group": {
                 "kind": "build",

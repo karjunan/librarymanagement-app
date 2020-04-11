@@ -1,0 +1,11 @@
+{
+    "compilerOptions" :{
+        "target" : "es6",
+        "module": "CommonJS",
+        "outDir": "js",
+        "sourceMap": true,
+        "watch": true,
+        "experimentalDecorators": true
+    },
+    "files": ["app.ts"]
+}

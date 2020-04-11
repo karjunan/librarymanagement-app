@@ -1,18 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const enum_1 = require("./enum");
 function GetAllBooks() {
-    var books = [
-        { id: 1, name: "MyBook-krishna", author: "krishna", available: true, category: Categories.Biography },
-        { id: 2, name: "MyBook-kumar", author: "kumar", available: false, category: Categories.Childrem },
-        { id: 3, name: "MyBook-Arjun", author: "Arjun", available: true, category: Categories.Poetry },
-        { id: 4, name: "MyBook-Mark", author: "Mark", available: true, category: Categories.Poetry },
+    let books = [
+        { id: 1, name: "MyBook-krishna", author: "krishna", available: true, category: enum_1.Categories.Biography },
+        { id: 2, name: "MyBook-kumar", author: "kumar", available: false, category: enum_1.Categories.Childrem },
+        { id: 3, name: "MyBook-Arjun", author: "Arjun", available: true, category: enum_1.Categories.Poetry },
+        { id: 4, name: "MyBook-Mark", author: "Mark", available: true, category: enum_1.Categories.Poetry },
     ];
     return books;
 }
-function LogFirstAvailableBook(books) {
-    if (books === void 0) { books = GetAllBooks(); }
-    var numberOfBooks = books.length;
-    var firstAvailableBook = '';
-    for (var _i = 0, books_1 = books; _i < books_1.length; _i++) {
-        var book = books_1[_i];
+function LogFirstAvailableBook(books = GetAllBooks()) {
+    let numberOfBooks = books.length;
+    let firstAvailableBook = '';
+    for (const book of books) {
         if (book.available) {
             firstAvailableBook = book.name;
             break;
@@ -21,19 +22,11 @@ function LogFirstAvailableBook(books) {
     console.log('Total Books', numberOfBooks);
     console.log('First Available', firstAvailableBook);
 }
-var Categories;
-(function (Categories) {
-    Categories[Categories["Biography"] = 0] = "Biography";
-    Categories[Categories["Poetry"] = 1] = "Poetry";
-    Categories[Categories["History"] = 2] = "History";
-    Categories[Categories["Childrem"] = 3] = "Childrem";
-})(Categories || (Categories = {}));
 function GetBookTitlesByCategory(category) {
-    console.log('Getting all categories ', Categories[category]);
-    var books = GetAllBooks();
-    var bookTitle = [];
-    for (var _i = 0, books_2 = books; _i < books_2.length; _i++) {
-        var book = books_2[_i];
+    console.log('Getting all categories ', enum_1.Categories[category]);
+    const books = GetAllBooks();
+    const bookTitle = [];
+    for (const book of books) {
         if (book.category === category) {
             bookTitle.push(book.name);
         }
@@ -41,23 +34,23 @@ function GetBookTitlesByCategory(category) {
     return bookTitle;
 }
 function GetBookByID(id) {
-    var allBooks = GetAllBooks();
-    var result = allBooks.filter(function (v) { return v.id === id; });
-    return result;
+    const allBooks = GetAllBooks();
+    const book = allBooks.filter(v => v.id === id)[0];
+    return book;
 }
 function CreateCustomerID(name, id) {
     return name + '  ' + id;
 }
-var IDGenerator;
-IDGenerator = CreateCustomerID;
-var generatedId = IDGenerator('krishna', 1);
+// let IDGenerator: (chars: string, id: number) => string;
+let sg = CreateCustomerID;
+const generatedId = sg('krishna', 1);
 console.log('Genereate ID is => ', generatedId);
-var allBooks = GetAllBooks();
+const allBooks = GetAllBooks();
 LogFirstAvailableBook();
-var title = GetBookTitlesByCategory(Categories.Poetry);
+const title = GetBookTitlesByCategory(enum_1.Categories.Poetry);
 console.log(title);
-title.forEach(function (v) { return console.log('Result is => ', v); });
-var result = GetBookByID(2);
+title.forEach((v) => console.log('Result is => ', v));
+const result = GetBookByID(2);
 console.log("Returned book based on ID =>", result[0]);
 function CreateCustomer(name, age, city) {
     console.log("customer details => ", name, age, city);
@@ -70,9 +63,27 @@ function GetTitles(property) {
     }
     else if (typeof property === 'number') {
         console.log("Overloaded functions ");
-        var ID = GetBookByID(property);
+        const ID = GetBookByID(property);
         console.log(ID[0]);
     }
 }
-GetTitles(Categories.Biography);
+// GetTitles(Categories.Biography);
+function printBook(book) {
+    console.log(book.name + " = " + book.author);
+}
+let myBook = {
+    id: 5,
+    name: 'Life of Ram',
+    author: 'Ram Aujha',
+    available: true,
+    category: enum_1.Categories.Biography,
+    year: '2019',
+    copies: 100,
+    markDamaged: (reason) => {
+        console.log("damaged book is because of ", reason);
+        return reason;
+    }
+};
+printBook(myBook);
+myBook.markDamaged("rain");
 //# sourceMappingURL=app.js.map
